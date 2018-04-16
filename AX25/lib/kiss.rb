@@ -8,7 +8,13 @@ module Cosmos
 
     def read_data(data)
       return super(data) if (data.length <= 0)
-      <decode TFEND and TFESC>
+
+      FEND_1  = data[0]
+      COMMAND = data[1]
+      FEND_2  = data[-1]
+
+      data = data[2..-2]
+
       return data
     end
 

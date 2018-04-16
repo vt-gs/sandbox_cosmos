@@ -1,11 +1,16 @@
 require 'cosmos/interfaces/protocols/protocol'
 module Cosmos
   class AX25Protocol < Protocol
-    FEND = "\xC0"
 
     def read_data(data)
       return super(data) if (data.length <= 0)
-      <decode TFEND and TFESC>
+
+      ADDR_DEST = data[0  ..55 ]
+      ADDR_SRC  = data[56 ..111]
+      CONTROL   = data[111..118]
+      PROTOCOL  = data[119..126]
+      INFO      = data[127..-1 ]
+
       return data
     end
 
